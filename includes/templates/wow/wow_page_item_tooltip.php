@@ -14,7 +14,7 @@ $ssv = WoW_Template::GetPageData('ssv');
     <ul class="item-specs" style="margin: 0">
         <?php
         // Is binded to instance?
-        if($proto->Map > 0 && $mapName = DB::WoW()->selectCell("SELECT `name_%s` FROM `DBPREFIX_maps` WHERE `id` = %d", $proto->Map)) {
+        if($proto->Map > 0 && $mapName = DB::WoW()->selectCell("SELECT `name_%s` FROM `DBPREFIX_maps` WHERE `id` = %d", WoW_Locale::GetLocale(), $proto->Map)) {
             echo sprintf('<li>%s</li>', $mapName);
         }
         // Is heroic?
