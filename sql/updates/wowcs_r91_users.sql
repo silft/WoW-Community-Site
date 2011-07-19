@@ -3,4 +3,4 @@ ADD  `email` TEXT NOT NULL ,
 ADD  `password` TEXT NOT NULL ,
 ADD  `secredQ` TEXT NOT NULL ,
 ADD  `secredA` TEXT NOT NULL ,
-ADD  `dob` DATE NOT NULL
+ADD  `dob` DATE NOT NULL;
