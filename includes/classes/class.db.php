@@ -22,7 +22,7 @@ Class DB implements DB_Interface {
     private static $database_objects     = array();
     private static $database_configs     = array();
     private static $database_connections = array();
-    private static $realm_id             = 0;
+    private static $realm_id             = 1;
     
     public static function LoadConfigs() {
         self::$database_configs[DB_WORLD]  = (object) DatabaseConfig::$world;

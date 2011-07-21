@@ -106,11 +106,16 @@ function WoW_Autoload($className)
 {
     //prevent error when mailer classes are loaded
     if(!preg_match('/swift_(.*)/i', $className)) {
-        $className = strtolower(str_replace('WoW_', null, $className));
-        if(!file_exists(CLASSES_DIR . 'class.' . $className . '.php')) {
-            die('<strong>Autoload Fatal Error:</strong> unable to autoload class ' . $className . '!');
+        if(preg_match('/[^DB][Ss]torage/i', $className)) {
+            $classFileName = INCLUDES_DIR . 'storages' . DS . ucfirst(str_replace('Storage', null, $className)) . '.php';
         }
-        include(CLASSES_DIR . 'class.' . $className . '.php');
+        else {
+            $classFileName = CLASSES_DIR . 'class.' . strtolower(str_replace('WoW_', null, $className)) . '.php';
+        }
+        if(!file_exists($classFileName)) {
+            die('<strong>Autoload Fatal Error:</strong> unable to autoload class ' . $className . ' (path: ' . $classFileName . ')!');
+        }
+        include($classFileName);
     }
 }
 // Initialize debug log
