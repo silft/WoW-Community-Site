@@ -324,5 +324,58 @@ class WoW_DBStorage {
         }
         return $name;
     }
+    
+    /**
+     * Joins one or more storages into one.
+     * Usage:
+     *  $ach = new AchievementStorage();
+     *  $ach->FindEntry(6)->Join('CharacterAchievementStorage', 6, 'achievement');   
+     **/
+    public function Join($storage_name, $storage_entry, $storage_index = '') {
+        $storage = new $storage_name();
+        if(!$storage) {
+            WoW_Log::WriteError('%s : storage %s was not found, unable to perform joining!', __METHOD__, $storage_name);
+            return false;
+        }
+        if($storage_index != '') {
+            $storage->SetSearchOptions(array($storage_index => $storage_entry))->FindEntry();
+        }
+        else {
+            $storage->FindEntry($storage_entry);
+        }
+        $db_data = $storage->GetData();
+        $data = array();
+        $i = 0;
+        if(is_array($db_data)) {
+            foreach($db_data as $field => $value) {
+                if(is_array($value)) {
+                    foreach($value as $key => $val) {
+                        $data[$i][$key] = $val;
+                    }
+                    ++$i;
+                }
+                else {
+                    $data[$field][$value];
+                }
+            }
+        }
+        $tmp = array();
+        foreach($data as $index => $value) {
+            if(is_Array($value)) {
+                $tmp = array();
+                foreach($value as $key => $val) {
+                    $tmp[$key] = $val;
+                }
+                $this->m_data[] = $tmp;
+            }
+            else {
+                if(isset($this->m_data[$index])) {
+                    $index .= '_' . $storage_name;
+                }
+                $this->m_data[$index] = $value;
+            }
+        }
+        return $this;
+    }
 }
 ?>
