@@ -1,11 +1,12 @@
-=========================
+================================================
 How to install World of Warcraft Community Site
-=========================
+================================================
 
 SYSTEM REQUIREMENTS:
 1. Apache HTTP Server
-2. PHP 5
+2. PHP 5.1+
 3. MySQL 5 Server or higher
+4. php_mysqli extension
 
 INSTALLATION STEPS:
 1. Create new MySQL database (`wowcs`, for expample) with utf8_general_ci encoding;
@@ -48,14 +49,15 @@ Add /wowdirectory/ to every line in this file:
    RewriteRule ^creation/(.*) /wowdirectory/account/creation.php?%{QUERY_STRING}
 Also, you NEED to set $WoW_Path variable in "includes/configs/WoWConfig.php" file to your directory!
 
-=========================
+==========================================
 Установка World of Warcraft Community Site
-=========================
+==========================================
 
 СИСТЕМНЫЕ ТРЕБОВАНИЯ:
 1. Web-сервер Apache HTTP Server
-2. PHP 5
+2. PHP 5.1+
 3. MySQL 5 Server или выше
+4. Расширение php_mysqli.
 
 ПОРЯДОК УСТАНОВКИ:
 1. Создайте новую базу данных MySQL (`wowcs`, например) с кодировкой utf8_general_ci encoding;

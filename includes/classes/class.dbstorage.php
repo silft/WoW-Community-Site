@@ -72,7 +72,7 @@ class WoW_DBStorage {
     protected $m_locale = '';
     
     /**
-     * World DB Locale ID (_0, _8, etc), defined at object creation
+     * World DB Locale ID (_loc1, _loc8, etc), defined at object creation, must be > 0
      **/
     protected $m_dbLocale = 0;
     
@@ -188,7 +188,7 @@ class WoW_DBStorage {
     }
     
     /**
-     * Executed "selectRow" method of $this->m_db object.
+     * Executes "selectRow" method of $this->m_db object.
      **/
     protected function selectRow() {
         if(!is_object($this->m_db) || !method_exists($this->m_db, 'selectRow'))
@@ -198,10 +198,10 @@ class WoW_DBStorage {
     }
     
     /**
-     * Executed "select" method of $this->m_db object.
+     * Executes "select" method of $this->m_db object.
      **/
     protected function select() {
-        if(!is_object($this->m_db) || !method_exists($this->m_db, 'selectRow'))
+        if(!is_object($this->m_db) || !method_exists($this->m_db, 'select'))
             return $this;
         $this->m_data = call_user_func_array(array($this->m_db, 'select'), $this->m_sqlData);
         return $this;
