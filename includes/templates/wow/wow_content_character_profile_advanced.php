@@ -214,7 +214,7 @@ World of Warcraft
         $unench_slots_js_tpl = '"unenchantedItems": {%s},';
         $count_unech_items = count($audit[AUDIT_TYPE_UNENCHANTED_ITEM]);
         for($i = 0; $i < $count_unech_items; ++$i) {
-            if($i) {
+            if($i > 0 && $i < $count_unech_items) {
                 $unench_slots .= ',';
                 $unench_slots_js .= ",";
             }
@@ -232,14 +232,14 @@ World of Warcraft
         $count_empty_sockets = 0;
         $i = 0;
         foreach($audit[AUDIT_TYPE_EMPTY_SOCKET] as $tmp) {
-            if($i < count($audit[AUDIT_TYPE_EMPTY_SOCKET])-1) {
-                $empty_sockets_slots .= ',';
-                $empty_sockets_slots_js .= ',';
-            }
             $count_empty_sockets += $tmp['count'];
             $empty_sockets_slots .= $tmp['slot'];
             $empty_sockets_slots_js .= $tmp['slot'] . ': ' . $tmp['count'];
             ++$i;
+            if($i < count($audit[AUDIT_TYPE_EMPTY_SOCKET])) {
+                $empty_sockets_slots .= ',';
+                $empty_sockets_slots_js .= ',';
+            }
         }
         $empty_sockets_js = sprintf($empty_sockets_slots_js_tpl, $empty_sockets_slots_js);
         echo sprintf('<li data-slots="%s">
