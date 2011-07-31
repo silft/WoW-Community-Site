@@ -1028,4 +1028,7 @@ define('SOURCE_TYPE_CARD_GAME', 8);
 define('SOURCE_TYPE_TRAINER', 9);
 define('SOURCE_TYPE_VENDOR', 10);
 define('SOURCE_TYPE_OTHER', 11);
+
+define('BOSS_FLAG_EXTRA_LEVEL', 1);
+define('BOSS_FLAG_BOSS_RANK', 2);
 ?>

@@ -36,6 +36,9 @@ Class WoW {
         if($database_revision != DB_VERSION) {
             $errorMessage .= '<li>You have outdated DB (current revision: ' . DB_VERSION . ', your revision: ' . ($database_revision != null ? $database_revision : '<none>') . '). Please, update project DB with SQL updates from "sql/updates" folder.</li>';
         }
+        if(CONFIG_VERSION != WoWConfig::$ConfigVersion) {
+            $errorMessage .= '<li>You have outdated configuration file (current version: ' . CONFIG_VERSION . ', your revision: ' . WoWConfig::$ConfigVersion . '). Please, update WoWConfig.php from WoWConfig.php.default.</li>';
+        }
         if($errorMessage != '') {
             die('<em><strong style="color:#ff0000">Some error(s) appeared during core self testing:</strong></em><ul>' . $errorMessage . '</ul>Please, solve this problem(s) and <a href="">refresh</a> this page again.');
         }
@@ -332,6 +335,8 @@ Class WoW {
             $realmList = DB::Realm()->select("SELECT `id`, `name`, `address`, `port`, `icon`, `timezone` FROM `realmlist`");
         }
         else {
+            if (!WoWConfig::$UseRealmsStatus)
+                return false;
             if(isset(self::$realmsStatusCache[$realmID])) {
                 return self::$realmsStatusCache[$realmID];
             }

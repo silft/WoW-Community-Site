@@ -1743,5 +1743,24 @@ The Battle.net Account Team<br />
     'template_forum_post_deleted_by' => 'Deleted by %s',
     'template_forum_post_deleted' => 'Deleted',
     'template_forum_post_edit_title' => 'Edit Post',
+    
+    'template_boss_level' => 'Level',
+    'template_boss_boss_rank' => 'Boss',
+    'template_boss_elite_rank' => 'Elite',
+    'template_boss_health' => 'Health',
+    'template_boss_type' => 'Type',
+    'template_boss_type_1' => 'Beast',
+    'template_boss_type_2' => 'Dragonkin',
+    'template_boss_type_3' => 'Demon',
+    'template_boss_type_4' => 'Elemental',
+    'template_boss_type_5' => 'Giant',
+    'template_boss_type_6' => 'Undead',
+    'template_boss_type_7' => 'Humanoid',
+    'template_boss_type_8' => 'Critter',
+    'template_boss_type_9' => 'Mechanicals',
+    'template_boss_type_10' => 'Uncategorized',
+
+    'template_boss_abilities' => 'Sample Abilities',
+    'template_boss_no_abilities' => 'This NPC has no known abilities.',
 );
 ?>
