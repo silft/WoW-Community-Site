@@ -19,15 +19,17 @@
  **/
 
 Class WoWConfig {
+    public static $UseCache          = false;
+    public static $CacheLifeTime     = 86400; // In seconds
     public static $DefaultBGName     = 'Massive Network';
     public static $MinLevelToDisplay = 10;
     public static $MinLevelToSearch  = 0;
     public static $UseLog            = true;
     public static $LogLevel          = 2;
-    public static $ConfigVersion     = '0508201101';
+    public static $ConfigVersion     = '0808201101';
     public static $CheckVersionType  = 'show';
-    public static $DefaultLocale     = 'ru';
-    public static $DefaultLocaleID   = 8;
+    public static $DefaultLocale     = 'en';
+    public static $DefaultLocaleID   = 0;
     public static $SkipBanned        = false;
     public static $WoW_Path          = ''; // Without slash at the end of path. If your site is in root directory, leave this empty.
                                            // For example: site is available at http://example.org/wowcs/
