@@ -34,6 +34,11 @@ class WoW_Cacher {
     private $m_cacheDataContents = null;
 
     public function __construct($pageId, $type) {
+        return $this->SetData($pageId, $type);
+    }
+
+    public function SetData($pageId, $type) {
+        $this->free();
         $this->m_pageId = $pageId;
         $this->m_cacheType = $type;
         if ($this->cacheAvailable()) {
@@ -41,7 +46,7 @@ class WoW_Cacher {
             return true;
         }
         $this->setTimestamp()->save();
-        return true;
+        return $this;
     }
 
     public function writeCacheSection($section, $value) {

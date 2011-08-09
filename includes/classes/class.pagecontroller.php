@@ -56,15 +56,36 @@ Class PageController {
 	protected function getDeep($mult = 0) {
 		return ($this->m_urlDeepOffset + $mult);
 	}
-    
-    public function FindActions() {
+
+    private function getUrlData(&$data, &$size) {
         $this->m_url = $_SERVER['REQUEST_URI'];
         $url_data = explode('/', $this->m_url);
         if(!$url_data || !is_array($url_data)) {
-            WoW_Template::ErrorPage(404);
+            WoW_Template::ErrorPage(404); // This should not happend
             return false;
         }
-        $url_size = sizeof($url_data);
+        $data = array();
+        $size = sizeof($url_data);
+        for($i = 0; $i < $size; ++$i) {
+            $clean = explode('?', $url_data[$i]);
+            if ($clean) {
+                $data[] = $clean[0];
+            }
+            else {
+                $data[] = $url_data[$i];
+            }
+        }
+        //print_r($data);
+        //die;
+    }
+    
+    public function FindActions() {
+        $url_data = array();
+        $url_size = 0;
+        $this->getUrlData($url_data, $url_size);
+        if(!$url_data) {
+            return false;
+        }
         if(!$url_size) {
             return false;
         }
@@ -123,7 +144,9 @@ Class PageController {
     }
     
     private function ParseURL() {
-        $url_data = explode('/', $this->m_url);
+        $url_data = array();
+        $size = 0;
+        $this->getUrlData($url_data, $size);
         $allowed_locales = array('de', 'en', 'es', 'fr', 'ru');
         if((!isset($url_data[$this->m_locale_index]) || $url_data[$this->m_locale_index] === null || !in_array($url_data[$this->m_locale_index], $allowed_locales)) && !$this->m_skip_redirect) {
             unset($url_data[$this->getDeep(0)]);
