@@ -20,7 +20,7 @@
 
 Class WoW_Items {
     
-    public function GetItemName($entry) {
+    public static function GetItemName($entry) {
         if(Wow_Locale::GetLocale() == 'en') {
             $itemName = DB::World()->selectCell("SELECT `name` FROM `item_template` WHERE `entry` = %d LIMIT 1", $entry);
         }
@@ -34,7 +34,7 @@ Class WoW_Items {
         return $itemName;
     }
     
-    public function GetItemIcon($entry, $displayid = 0) {
+    public static function GetItemIcon($entry, $displayid = 0) {
         if($displayid == 0) {
             $displayid = DB::World()->selectCell("SELECT `displayid` FROM `item_template` WHERE `entry` = %d LIMIT 1", $entry);
         }
@@ -390,7 +390,7 @@ Class WoW_Items {
         return $gem;
     }
     
-    public function GetTemplateSocketsCount($entry) {
+    public static function GetTemplateSocketsCount($entry) {
         $data = DB::World()->selectRow("SELECT `SocketColor_1`, `SocketColor_2`, `SocketColor_3` FROM `item_template` WHERE `entry` = %d LIMIT 1", $entry);
         if(!$data) {
             WoW_Log::WriteError('%s : item #%d was not found in `item_template` table!', __METHOD__, $entry);
@@ -1117,7 +1117,7 @@ Class WoW_Items {
         return $item_tabs;
     }
 
-    public function GetItemSource($entry) {
+    public static function GetItemSource($entry) {
         $source_info = DB::WoW()->selectRow("SELECT `source`, `areaKey` FROM `DBPREFIX_item_sources` WHERE `item` = %d", $entry);
         if(!$source_info) {
             return false;
@@ -1133,7 +1133,7 @@ Class WoW_Items {
         return false;
     }
     
-    public function FindItemSourceInfo($entry, $type) {
+    public static function FindItemSourceInfo($entry, $type) {
         $source_info = false;
         switch($type) {
             case 'sourceType.questReward':
